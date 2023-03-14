@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticationController;
-use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\Password\NewPasswordController;
+use App\Http\Controllers\Auth\Password\PasswordController;
+use App\Http\Controllers\Auth\Password\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
