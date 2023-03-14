@@ -20,7 +20,9 @@ export default function ForgotPassword({ status }) {
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout
+            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Forgotten Password</h2>}
+        >
             <Head title="Forgot Password" />
 
             <div className="mb-4 text-sm text-gray-600">
