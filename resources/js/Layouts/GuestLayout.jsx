@@ -18,21 +18,21 @@ export default function Guest({ header, children }) {
                             <div className="sm:absolute sm:top-0 sm:right-0 py-5 text-right">
                                 <NavLink
                                     href={route('register')}
-                                    className="ml-5 font-semibold text-gray-400 hover:text-gray-900"
+                                    className="font-semibold text-gray-400 hover:text-gray-900 hidden md:inline-flex"
                                 >
                                     Generate E-Card
                                 </NavLink>
 
                                 <NavLink
                                     href={route('login')}
-                                    className="ml-5 font-semibold text-gray-400 hover:text-gray-900"
+                                    className="ml-10 font-semibold text-gray-400 hover:text-gray-900"
                                 >
                                     Log in
                                 </NavLink>
 
                                 <NavLink
                                     href={route('register')}
-                                    className="mx-5 font-semibold text-gray-400 hover:text-gray-900"
+                                    className="mx-10 font-semibold text-gray-400 hover:text-gray-900"
                                 >
                                     Register
                                 </NavLink>
