@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Auth\Password;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
