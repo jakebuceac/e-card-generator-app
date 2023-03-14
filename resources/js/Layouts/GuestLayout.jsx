@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 import NavLink from "@/Components/NavLink";
+import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 
 export default function Guest({ header, children }) {
+    const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
@@ -25,18 +29,53 @@ export default function Guest({ header, children }) {
 
                                 <NavLink
                                     href={route('login')}
-                                    className="ml-10 font-semibold text-gray-400 hover:text-gray-900"
+                                    className="ml-10 font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
                                 >
                                     Log in
                                 </NavLink>
 
                                 <NavLink
                                     href={route('register')}
-                                    className="mx-10 font-semibold text-gray-400 hover:text-gray-900"
+                                    className="mx-10 font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
                                 >
                                     Register
                                 </NavLink>
                             </div>
+                        </div>
+
+                        <div className="absolute py-3.5 mr-5 right-0 text-right sm:hidden">
+                            <button
+                                onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
+                                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+                            >
+                                <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                    <path
+                                        className={!showingNavigationDropdown ? 'inline-flex' : 'hidden'}
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M4 6h16M4 12h16M4 18h16"
+                                    />
+                                    <path
+                                        className={showingNavigationDropdown ? 'inline-flex' : 'hidden'}
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                    />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
+                    <div className="pt-2 pb-3 border-b border-gray-200">
+
+                        <div className="mt-3 border-t-4 border-gray-300 space-y-2">
+                            <ResponsiveNavLink href={route('dashboard')}>Generate E-Card</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('login')}>Login</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('register')}>Register</ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
