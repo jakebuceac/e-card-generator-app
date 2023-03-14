@@ -57,7 +57,7 @@ export default function Authenticated({ auth, children }) {
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('dashboard')}>Your E-Cards</Dropdown.Link>
-                                        <Dropdown.Link href={route('profile.edit')}>Settings</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>
@@ -104,7 +104,7 @@ export default function Authenticated({ auth, children }) {
                         <div className="mt-3 border-t-4 border-gray-300 space-y-2">
                             <ResponsiveNavLink href={route('profile.edit')}>Generate E-Card</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Your E-Cards</ResponsiveNavLink>
-                            <ResponsiveNavLink href={route('profile.edit')}>Settings</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
