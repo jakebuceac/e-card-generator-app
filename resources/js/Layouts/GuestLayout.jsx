@@ -4,7 +4,7 @@ import NavLink from "@/Components/NavLink";
 
 export default function Guest({ header, children }) {
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
@@ -42,7 +42,7 @@ export default function Guest({ header, children }) {
                 </div>
             </nav>
 
-            <div className="h-screen flex flex-col sm:justify-center items-center sm:pt-0">
+            <div className="mt-auto flex sm:justify-center items-center sm:pt-0">
                 <div className="w-full sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                     {header && (
                         <header className="bg-white">
@@ -52,6 +52,19 @@ export default function Guest({ header, children }) {
                     {children}
                 </div>
             </div>
+
+
+            <footer
+                className="mt-auto bg-white text-center lg:text-left">
+                <div className="p-4 text-center text-neutral-700">
+                    © 2023 Copyright:
+                    <a
+                        className="text-neutral-800 dark:text-neutral-400"
+                    > E-Card Generator App</a
+                    >
+                </div>
+            </footer>
+
         </div>
     );
 }
