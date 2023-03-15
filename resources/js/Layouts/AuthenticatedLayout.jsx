@@ -5,11 +5,11 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
-export default function Authenticated({ auth, children }) {
+export default function Authenticated({ auth, mainClassName, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-gray-100">
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
@@ -24,7 +24,6 @@ export default function Authenticated({ auth, children }) {
                         <div className="hidden sm:flex sm:absolute sm:top-0 sm:right-0 sm:items-center py-4 text-right">
                             <div className="inline-flex">
                                 <NavLink
-                                    href={route('register')}
                                     className="font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
                                 >
                                     Generate E-Card
@@ -102,8 +101,8 @@ export default function Authenticated({ auth, children }) {
                         </div>
 
                         <div className="mt-3 border-t-4 border-gray-300 space-y-2">
-                            <ResponsiveNavLink href={route('profile.edit')}>Generate E-Card</ResponsiveNavLink>
-                            <ResponsiveNavLink href={route('profile.edit')}>Your E-Cards</ResponsiveNavLink>
+                            <ResponsiveNavLink>Generate E-Card</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('dashboard')}>Your E-Cards</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
@@ -113,7 +112,11 @@ export default function Authenticated({ auth, children }) {
                 </div>
             </nav>
 
-            <main>{children}</main>
+            {mainClassName ? (
+                <main className={mainClassName}>{children}</main>
+            ) : (
+                <main>{children}</main>
+            )}
 
             <footer className="mt-auto bg-white text-center lg:text-left">
                 <div className="p-4 text-center text-neutral-700">
