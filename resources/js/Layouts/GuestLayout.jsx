@@ -9,7 +9,7 @@ export default function Guest({ header, children }) {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+            <nav className="bg-white shadow border-b-2 border-indigo-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
                         <div className="flex">
@@ -91,8 +91,7 @@ export default function Guest({ header, children }) {
                 </div>
             </div>
 
-            <footer
-                className="mt-auto bg-white text-center lg:text-left">
+            <footer className="mt-auto bg-white text-center lg:text-left shadow border-t-2 border-indigo-200">
                 <div className="p-4 text-center text-neutral-700">
                     © 2023 Copyright:
                     <a

@@ -20,10 +20,10 @@ export default function Welcome(props) {
                             </div>
                         </header>
 
-                        <div className="mx-auto text-center space-y-12">
+                        <div className="mx-auto text-center space-y-6">
                             <p className="text-sm text-gray-600">Require a personalised E-Card Quickly?</p>
 
-                            <PrimaryButton className="py-4 px-16">
+                            <PrimaryButton className="py-4 px-14">
                                 Generate E-Card
                             </PrimaryButton>
                         </div>
@@ -34,10 +34,10 @@ export default function Welcome(props) {
                     header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Welcome</h2>}
                 >
 
-                    <div className="mx-auto text-center space-y-12">
+                    <div className="mx-auto text-center space-y-6">
                         <p className="text-sm text-gray-600">Require a personalised E-Card Quickly?</p>
 
-                        <PrimaryButton className="py-4 px-16">
+                        <PrimaryButton className="py-4 px-14">
                             Generate E-Card
                         </PrimaryButton>
                     </div>
