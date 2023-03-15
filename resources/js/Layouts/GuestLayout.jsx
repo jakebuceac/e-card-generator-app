@@ -9,7 +9,7 @@ export default function Guest({ header, children }) {
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
+            <nav className="bg-white shadow border-b-2 border-indigo-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
                         <div className="flex">
@@ -21,7 +21,6 @@ export default function Guest({ header, children }) {
 
                             <div className="sm:absolute sm:top-0 sm:right-0 py-5 text-right">
                                 <NavLink
-                                    href={route('register')}
                                     className="font-semibold text-gray-400 hover:text-gray-900 hidden md:inline-flex"
                                 >
                                     Generate E-Card
@@ -73,7 +72,7 @@ export default function Guest({ header, children }) {
                     <div className="pt-2 pb-3 border-b border-gray-200">
 
                         <div className="mt-3 border-t-4 border-gray-300 space-y-2">
-                            <ResponsiveNavLink href={route('dashboard')}>Generate E-Card</ResponsiveNavLink>
+                            <ResponsiveNavLink>Generate E-Card</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('login')}>Login</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('register')}>Register</ResponsiveNavLink>
                         </div>
@@ -82,19 +81,17 @@ export default function Guest({ header, children }) {
             </nav>
 
             <div className="mt-auto flex sm:justify-center items-center sm:pt-0">
-                <div className="w-full sm:max-w-md px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <div className="w-full sm:max-w-lg px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                     {header && (
                         <header className="bg-white">
-                            <div className="max-w-7xl mx-auto py-6 text-center">{header}</div>
+                            <div className="mx-auto py-6 text-center">{header}</div>
                         </header>
                     )}
                     {children}
                 </div>
             </div>
 
-
-            <footer
-                className="mt-auto bg-white text-center lg:text-left">
+            <footer className="mt-auto bg-white text-center lg:text-left shadow border-t-2 border-indigo-200">
                 <div className="p-4 text-center text-neutral-700">
                     © 2023 Copyright:
                     <a
@@ -103,7 +100,6 @@ export default function Guest({ header, children }) {
                     >
                 </div>
             </footer>
-
         </div>
     );
 }
