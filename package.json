@@ -1,5 +1,4 @@
 {
-    "homepage": ".",
     "private": true,
     "scripts": {
         "dev": "vite",
