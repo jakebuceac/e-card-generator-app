@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from "@/Components/PrimaryButton";
@@ -23,9 +23,11 @@ export default function Welcome(props) {
                         <div className="mx-auto text-center space-y-6">
                             <p className="text-sm text-gray-600">Require a personalised E-Card Quickly?</p>
 
-                            <PrimaryButton className="py-4 px-14">
-                                Generate E-Card
-                            </PrimaryButton>
+                            <Link href={route('e-card.generation.create')}>
+                                <PrimaryButton className="mt-6 py-4 px-14">
+                                    Generate E-Card
+                                </PrimaryButton>
+                            </Link>
                         </div>
                     </div>
                 </AuthenticatedLayout>
@@ -37,9 +39,11 @@ export default function Welcome(props) {
                     <div className="mx-auto text-center space-y-6">
                         <p className="text-sm text-gray-600">Require a personalised E-Card Quickly?</p>
 
-                        <PrimaryButton className="py-4 px-14">
-                            Generate E-Card
-                        </PrimaryButton>
+                        <Link href={route('e-card.generation.create')}>
+                            <PrimaryButton className="mt-6 py-4 px-14">
+                                Generate E-Card
+                            </PrimaryButton>
+                        </Link>
                     </div>
 
                 </GuestLayout>

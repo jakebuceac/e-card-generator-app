@@ -10,6 +10,17 @@ enum ECardOccasionEnum: string
     case VALENTINES = 'valentines';
     case HALLOWEEN = 'halloween';
 
+    public function name(): string
+    {
+        return match ($this) {
+            self::BIRTHDAY => 'Birthday',
+            self::CHRISTMAS => 'Christmas',
+            self::EASTER => 'Easter',
+            self::VALENTINES => "Valentine's",
+            self::HALLOWEEN => 'Halloween',
+        };
+    }
+
     public function prompt(): string
     {
         return match ($this) {
@@ -29,5 +40,10 @@ enum ECardOccasionEnum: string
             self::EASTER => '#616161',
             self::HALLOWEEN => '#BDBDBD',
         };
+    }
+
+    public static function list(): array
+    {
+        return collect(self::cases())->mapWithKeys(fn (ECardOccasionEnum $cardOccasionEnum) => [$cardOccasionEnum->name() => $cardOccasionEnum->value])->toArray();
     }
 }
