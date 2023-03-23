@@ -7,7 +7,7 @@ export default forwardRef(function SelectInput({ className = '', isFocused = fal
 
     const [currentState, setCurrentState] = useState(options[keys[0]])
 
-    const changeFruit = (newOption) => {
+    const changeState = (newOption) => {
         setCurrentState(newOption)
     }
 
@@ -20,7 +20,7 @@ export default forwardRef(function SelectInput({ className = '', isFocused = fal
     return (
         <div className="flex flex-col items-start">
             <select
-                onChange={(event) => changeFruit(event.target.value)}
+                onChange={(event) => changeState(event.target.value)}
                 value={currentState}
                 {...props}
                 className={
@@ -29,6 +29,7 @@ export default forwardRef(function SelectInput({ className = '', isFocused = fal
                 }
                 ref={input}
             >
+                <option value="" selected>-</option>
                 {keys.map((key) => (
                     <option value={options[key]} key={key}>{key}</option>
                 ))}

@@ -9,8 +9,8 @@ import SelectInput from "@/Components/SelectInput";
 export default function Generate({ auth, image_sizes, occasions }) {
     const { data, setData, post, processing, errors } = useForm({
         recipient_name: '',
-        image_size: image_sizes[Object.keys(image_sizes)[0]],
-        occasion: occasions[Object.keys(occasions)[0]],
+        image_size: '',
+        occasion: '',
         personal_message: '',
     });
 
