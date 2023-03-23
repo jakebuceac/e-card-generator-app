@@ -8,6 +8,15 @@ enum ECardSizeEnum: string
     case MEDIUM = '512x512';
     case LARGE = '1024x1024';
 
+    public function name(): string
+    {
+        return match ($this) {
+            self::SMALL => 'Small',
+            self::MEDIUM => 'Medium',
+            self::LARGE => 'Large',
+        };
+    }
+
     public function number(): int
     {
         return match ($this) {
@@ -33,5 +42,10 @@ enum ECardSizeEnum: string
             self::MEDIUM => 19,
             self::LARGE => 49,
         };
+    }
+
+    public static function list(): array
+    {
+        return collect(self::cases())->mapWithKeys(fn (ECardSizeEnum $cardSizeEnum) => [$cardSizeEnum->name() . ' (' . $cardSizeEnum->value . ')' => $cardSizeEnum->value])->toArray();
     }
 }

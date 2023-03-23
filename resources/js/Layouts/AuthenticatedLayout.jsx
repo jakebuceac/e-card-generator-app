@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
+import background from '@/Assests/background.png';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
@@ -9,7 +10,11 @@ export default function Authenticated({ auth, mainClassName, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-auto bg-center" style={
+            {
+                backgroundImage: 'url(' + background + ')',
+            }
+        }>
             <nav className="bg-white shadow border-b-2 border-indigo-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
@@ -21,9 +26,10 @@ export default function Authenticated({ auth, mainClassName, children }) {
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:absolute sm:top-0 sm:right-0 sm:items-center py-4 text-right">
+                        <div className="hidden md:flex sm:absolute sm:top-0 sm:right-0 sm:items-center py-4 text-right">
                             <div className="inline-flex">
                                 <NavLink
+                                    href={route('e-card.generation.create')}
                                     className="font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
                                 >
                                     Generate E-Card
@@ -65,7 +71,7 @@ export default function Authenticated({ auth, mainClassName, children }) {
                             </div>
                         </div>
 
-                        <div className="absolute py-3.5 mr-5 right-0 text-right sm:hidden">
+                        <div className="absolute py-3.5 mr-5 right-0 text-right md:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
@@ -91,7 +97,7 @@ export default function Authenticated({ auth, mainClassName, children }) {
                     </div>
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
+                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' md:hidden'}>
                     <div className="pt-2 pb-3 border-b border-gray-200">
                         <div className="px-4">
                             <div className="font-medium text-base text-gray-800">
@@ -101,7 +107,7 @@ export default function Authenticated({ auth, mainClassName, children }) {
                         </div>
 
                         <div className="mt-3 border-t-4 border-gray-300 space-y-2">
-                            <ResponsiveNavLink>Generate E-Card</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('e-card.generation.create')}>Generate E-Card</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('dashboard')}>Your E-Cards</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
