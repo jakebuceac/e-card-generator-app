@@ -11,6 +11,7 @@ export default function GenerateForm({ auth, image_sizes, occasions }) {
         recipient_name: '',
         image_size: '',
         occasion: '',
+        additional_prompt_details: '',
         personal_message: '',
     });
 
@@ -102,6 +103,29 @@ export default function GenerateForm({ auth, image_sizes, occasions }) {
                         />
 
                         <InputError message={errors.occasion} className="mt-2" />
+                    </div>
+
+                    <div className="mt-4">
+                        <InputLabel htmlFor="additional_prompt_details" value="Additional E-Card Details" />
+
+                        <TextInput
+                            id="additional_prompt_details"
+                            name="additional_prompt_details"
+                            value={data.additional_prompt_details}
+                            className="mt-1 block w-full"
+                            autoComplete="additional_prompt_details"
+                            isFocused={true}
+                            onChange={handleOnChange}
+                        />
+
+                        <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                            Provide extra details, keywords or phrases related to your image prompt to enhance the generation process. <br/>
+                        </p>
+                        <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                            Example for a Christmas Card: "Add snowmen to the background."
+                        </p>
+
+                        <InputError message={errors.additional_prompt_details} className="mt-2" />
                     </div>
 
                     <div className="mt-4">

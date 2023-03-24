@@ -30,7 +30,7 @@ class GenerationController extends Controller
             ->limit(6)
             ->get();
 
-        $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size);
+        $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size, $request->additional_prompt_details);
 
         $imageUrls = (new CompileECardsAction())->execute(
             $generatedImages,
