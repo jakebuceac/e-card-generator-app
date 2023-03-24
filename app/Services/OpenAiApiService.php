@@ -18,12 +18,25 @@ class OpenAiApiService
      */
     public function __construct()
     {
+        if (config('app.env') !== 'production') {
+            $response = collect([
+                'created' => now()->toDateTime(),
+                'data' => [
+                    [
+                        'url' => base_path('tests/Stubs/Test_1024x1024.png'),
+                    ],
+                ],
+            ]);
 
+            $this->httpClient = Http::fake([
+                '/images/generations' => Http::response($response),
+            ])->baseUrl(config('services.openai_api.url'));
+        } else {
             $this->httpClient = Http::withHeaders([
                 'Content-Type' => 'application/json',
                 'Authorization' => 'Bearer ' . config('services.openai_api.secret_key'),
             ])->baseUrl(config('services.openai_api.url'));
-
+        }
     }
 
     /**
@@ -37,7 +50,7 @@ class OpenAiApiService
      */
     public function generateImages(string $occasion, string $imageSize, string $additionalPromptDetails = null): Collection
     {
-        $prompt = $additionalPromptDetails ? ECardOccasionEnum::from($occasion)->prompt() . " " . $additionalPromptDetails : ECardOccasionEnum::from($occasion)->prompt();
+        $prompt = $additionalPromptDetails ? ECardOccasionEnum::from($occasion)->prompt() . ' ' . $additionalPromptDetails : ECardOccasionEnum::from($occasion)->prompt();
         $response = $this->httpClient
             ->post('/images/generations', [
                 'prompt' => $prompt,
