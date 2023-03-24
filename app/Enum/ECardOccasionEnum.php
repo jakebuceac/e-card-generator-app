@@ -28,7 +28,7 @@ enum ECardOccasionEnum: string
             self::CHRISTMAS => 'Create a festive and cheerful scene that would be perfect for a Christmas card. The background should be a white and snowy color palette.',
             self::EASTER => 'Create a joyful scene that would be perfect for an Easter card. The background should be a bright and cheerful pastel color palette.',
             self::VALENTINES => "Create a romantic scene that would be perfect for a Valentine's card. The background should be a warm orange and pink color palette.",
-            self::HALLOWEEN => 'Create a spooky scene that would be perfect for a Halloween card. The overall color scheme should be dark and eerie, with shades of purple, black and orange.'
+            self::HALLOWEEN => 'Create a spooky scene that would be perfect for a Halloween card. The background should be a dark and eerie color palette.'
         };
     }
 

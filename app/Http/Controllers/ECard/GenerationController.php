@@ -1,37 +1,38 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ECard;
 
 use App\Actions\CompileECardsAction;
 use App\Enum\ECardOccasionEnum;
 use App\Enum\ECardSizeEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ECard\ECardGenerateRequest;
 use App\Models\PersonalMessage;
 use App\Services\OpenAiApiService;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class ECardGenerationController extends Controller
+class GenerationController extends Controller
 {
     public function create(): Response
     {
-        return Inertia::render('E-Card/Generate', [
+        return Inertia::render('ECard/Generate/GenerateForm', [
             'image_sizes' => ECardSizeEnum::list(),
             'occasions' => ECardOccasionEnum::list(),
         ]);
     }
 
-    public function store(ECardGenerateRequest $request)
+    public function store(ECardGenerateRequest $request): Response
     {
         $openaiApiService = new OpenAiApiService();
         $personalMessages = PersonalMessage::byOccasion($request->occasion)
             ->inRandomOrder()
-            ->limit(5)
+            ->limit(6)
             ->get();
 
         $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size);
 
-        return (new CompileECardsAction())->execute(
+        $imageUrls = (new CompileECardsAction())->execute(
             $generatedImages,
             $request->occasion,
             $request->image_size,
@@ -39,5 +40,9 @@ class ECardGenerationController extends Controller
             $request->personal_message,
             $personalMessages
         );
+
+        return Inertia::render('ECard/Generate/ShowNewECards', [
+            'image_urls' => $imageUrls,
+        ]);
     }
 }

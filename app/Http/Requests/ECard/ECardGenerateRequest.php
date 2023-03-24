@@ -17,10 +17,10 @@ class ECardGenerateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recipient_name' => 'required|string|max:255',
+            'recipient_name' => 'required|string|max:20',
             'image_size' => [new Enum(ECardSizeEnum::class), 'required'],
             'occasion' => [new Enum(ECardOccasionEnum::class), 'required'],
-            'personal_message' => 'string|max:40',
+            'personal_message' => 'string|max:37',
         ];
     }
 }

@@ -52,7 +52,7 @@ class OpenAiApiService
         $response = $this->httpClient
             ->post('/images/generations', [
                 'prompt' => ECardOccasionEnum::from($occasion)->prompt(),
-                'n' => 5,
+                'n' => 6,
                 'size' => $imageSize,
             ]);
 

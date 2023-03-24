@@ -6,7 +6,7 @@ import { Head, useForm } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 import SelectInput from "@/Components/SelectInput";
 
-export default function Generate({ auth, image_sizes, occasions }) {
+export default function GenerateForm({ auth, image_sizes, occasions }) {
     const { data, setData, post, processing, errors } = useForm({
         recipient_name: '',
         image_size: '',
@@ -14,12 +14,22 @@ export default function Generate({ auth, image_sizes, occasions }) {
         personal_message: '',
     });
 
+    function removeEmptyFields(data) {
+        Object.keys(data).forEach(key => {
+            if (data[key] === '' || data[key] == null) {
+                delete data[key];
+            }
+        });
+    }
+
     const handleOnChange = (event) => {
         setData(event.target.name, event.target.type === 'checkbox' ? event.target.checked : event.target.value);
     };
 
     const submit = (e) => {
         e.preventDefault();
+
+        removeEmptyFields(data)
 
         post(route('e-card.generation.store'));
     };
@@ -29,9 +39,6 @@ export default function Generate({ auth, image_sizes, occasions }) {
             auth={auth}
             mainClassName="mt-auto flex sm:justify-center items-center sm:pt-0"
         >
-
-            <Head title="Generate" />
-
             <div className="m-auto w-full sm:max-w-lg px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <header className="bg-white">
                     <div className="max-w-7xl mx-auto py-6 text-center">
@@ -42,6 +49,8 @@ export default function Generate({ auth, image_sizes, occasions }) {
                         <p className="text-sm text-gray-600">Please input the following details to help us make your "unique" e-card!</p>
                     </div>
                 </header>
+
+                <Head title="Generate E-Card" />
 
                 <form onSubmit={submit}>
                     <div>
@@ -103,12 +112,12 @@ export default function Generate({ auth, image_sizes, occasions }) {
                             name="personal_message"
                             value={data.personal_message}
                             className="mt-1 block w-full"
-                            autoComplete="recipient_name"
+                            autoComplete="personal_message"
                             isFocused={true}
                             onChange={handleOnChange}
                         />
 
-                        <InputError message={errors.recipient_name} className="mt-2" />
+                        <InputError message={errors.personal_message} className="mt-2" />
                     </div>
 
 
