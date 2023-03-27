@@ -23,7 +23,22 @@ class OpenAiApiService
                 'created' => now()->toDateTime(),
                 'data' => [
                     [
-                        'url' => base_path('tests/Stubs/Test_1024x1024.png'),
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x1256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
                     ],
                 ],
             ]);
