@@ -32,7 +32,7 @@ class GenerationController extends Controller
 
         $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size, $request->additional_prompt_details);
 
-        $imageUrls = (new CompileECardsAction())->execute(
+        $images = (new CompileECardsAction())->execute(
             $generatedImages,
             $request->occasion,
             $request->image_size,
@@ -42,7 +42,7 @@ class GenerationController extends Controller
         );
 
         return Inertia::render('ECard/Generate/ShowNewECards', [
-            'image_urls' => $imageUrls,
+            'images' => $images,
         ]);
     }
 }

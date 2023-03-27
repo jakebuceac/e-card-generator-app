@@ -1,8 +1,8 @@
 import { Head } from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
-export default function ShowNewECards({ auth, image_urls }) {
-    const keys = Object.keys(image_urls);
+export default function ShowNewECards({ auth, images }) {
+    const keys = Object.keys(images);
 
     return (
         <Authenticated
@@ -23,7 +23,7 @@ export default function ShowNewECards({ auth, image_urls }) {
                             {keys.map((key) => (
                                 <div className="mx-auto">
                                     <img
-                                        src={image_urls[key]['url']}
+                                        src={images[key]['url']}
                                         alt="image"/>
                                 </div>
                             ))}
