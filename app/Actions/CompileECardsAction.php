@@ -24,7 +24,8 @@ class CompileECardsAction
     public function execute(Collection $urls, string $occasion, string $imageSize, string $recipientName, string $usersMessage = null, $personalMessages): Collection
     {
         return $urls->map(function ($item, $key) use ($occasion, $recipientName, $imageSize, $usersMessage, $personalMessages) {
-            $temporaryFilePath = '/e-card/temporary/' . date('Y-m-dH:i:s') . uniqid() . '.png';
+            $fileName = date('Y-m-dH:i:s') . uniqid() . '.png';
+            $temporaryFilePath = '/e-card/temporary/' . $fileName;
 
             $header = preg_replace('/xxx/i', $recipientName, $personalMessages[$key]['header']);
             $message = $usersMessage ?? preg_replace('/xxx/i', $recipientName, $personalMessages[$key]['message']);
@@ -41,7 +42,6 @@ class CompileECardsAction
 
             Storage::put($temporaryFilePath, file_get_contents($item['url']), [
                 'Metadata' => [
-                    'Expiry' => now()->addHours(2)->toDateTimeString(),
                     'header' => $header,
                     'message' => $message,
                     'fontColour' => $fontColour,
@@ -66,17 +66,17 @@ class CompileECardsAction
 
             $img->resize(256, 256);
 
-            $temporaryThumbnailPath = '/e-card/thumbnail/temporary/' . date('Y-m-dH:i:s') . uniqid() . '.png';
+            $temporaryThumbnailPath = '/e-card/thumbnail/temporary/' . $fileName;
 
-            Storage::put($temporaryThumbnailPath, $img->stream(), [
-                'Metadata' => [
-                    'Expiry' => now()->addHours(2)->toDateTimeString(),
-                ],
-            ]);
+            Storage::put($temporaryThumbnailPath, $img->stream());
 
-            $item['url'] = Storage::url($temporaryThumbnailPath);
-
-            return $item;
+            return [
+                'fileName' => $fileName,
+                'url' => Storage::url($temporaryThumbnailPath),
+                'header' => $header,
+                'message' => $message,
+                'fontColour' => $fontColour,
+            ];
         });
     }
 }

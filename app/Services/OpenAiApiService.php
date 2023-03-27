@@ -23,7 +23,22 @@ class OpenAiApiService
                 'created' => now()->toDateTime(),
                 'data' => [
                     [
-                        'url' => base_path('tests/Stubs/Test_1024x1024.png'),
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                    ],
+                    [
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
                     ],
                 ],
             ]);
@@ -44,15 +59,17 @@ class OpenAiApiService
      *
      * @param string $occasion
      * @param string $imageSize
+     * @param string|null $additionalPromptDetails
      * @return Collection
      * @throws OpenAiException
      */
-    public function generateImages(string $occasion, string $imageSize): Collection
+    public function generateImages(string $occasion, string $imageSize, string $additionalPromptDetails = null): Collection
     {
+        $prompt = $additionalPromptDetails ? ECardOccasionEnum::from($occasion)->prompt() . ' ' . $additionalPromptDetails : ECardOccasionEnum::from($occasion)->prompt();
         $response = $this->httpClient
             ->post('/images/generations', [
-                'prompt' => ECardOccasionEnum::from($occasion)->prompt(),
-                'n' => 5,
+                'prompt' => $prompt,
+                'n' => 6,
                 'size' => $imageSize,
             ]);
 

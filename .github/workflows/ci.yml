@@ -2,11 +2,11 @@ name: CI
 
 on:
   push:
-    branches: 
+    branches:
     - main
     - develop
   pull_request:
-    branches: 
+    branches:
     - main
     - develop
 
@@ -14,7 +14,7 @@ jobs:
   laravel-tests:
 
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
       with:
@@ -34,6 +34,7 @@ jobs:
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
+        OPENAI_API_URL: https://api.openai.com/v1
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
