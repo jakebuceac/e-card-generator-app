@@ -29,7 +29,7 @@ class OpenAiApiService
                         'url' => base_path('tests/Stubs/Test_256x256.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x1256.png'),
+                        'url' => base_path('tests/Stubs/Test_256x256.png'),
                     ],
                     [
                         'url' => base_path('tests/Stubs/Test_256x256.png'),
