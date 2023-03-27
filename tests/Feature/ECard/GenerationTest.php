@@ -41,10 +41,13 @@ class GenerationTest extends TestCase
             ->assertSessionHasNoErrors()
             ->assertOk();
 
-        $this->assertTrue(Storage::exists('/e-card/temporary'));
-        $this->assertTrue(Storage::exists('/e-card/thumbnail/temporary'));
+        $eCardsTemporaryPath = '/' . $user->id . '/e-cards/temporary/';
+        $thumbnailsTemporaryPath = '/' . $user->id . '/e-cards/thumbnails/temporary/';
 
-        $this->assertTrue(count(Storage::allFiles('/e-card/temporary')) === 6);
-        $this->assertTrue(count(Storage::allFiles('/e-card/thumbnail/temporary')) === 6);
+        $this->assertTrue(Storage::exists($eCardsTemporaryPath));
+        $this->assertTrue(Storage::exists($thumbnailsTemporaryPath));
+
+        $this->assertTrue(count(Storage::allFiles($eCardsTemporaryPath)) === 6);
+        $this->assertTrue(count(Storage::allFiles($thumbnailsTemporaryPath)) === 6);
     }
 }

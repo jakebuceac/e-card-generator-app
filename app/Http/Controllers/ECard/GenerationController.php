@@ -24,6 +24,7 @@ class GenerationController extends Controller
 
     public function store(ECardGenerateRequest $request): Response
     {
+        $user = $request->user();
         $openaiApiService = new OpenAiApiService();
         $personalMessages = PersonalMessage::byOccasion($request->occasion)
             ->inRandomOrder()
@@ -33,6 +34,7 @@ class GenerationController extends Controller
         $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size, $request->additional_prompt_details);
 
         $images = (new CompileECardsAction())->execute(
+            $user,
             $generatedImages,
             $request->occasion,
             $request->image_size,

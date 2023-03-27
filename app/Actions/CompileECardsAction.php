@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Enum\ECardOccasionEnum;
 use App\Enum\ECardSizeEnum;
+use App\Models\User;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -21,11 +22,12 @@ class CompileECardsAction
      * @param $personalMessages
      * @return Collection
      */
-    public function execute(Collection $urls, string $occasion, string $imageSize, string $recipientName, string $usersMessage = null, $personalMessages): Collection
+    public function execute(User $user, Collection $urls, string $occasion, string $imageSize, string $recipientName, string $usersMessage = null, $personalMessages): Collection
     {
-        return $urls->map(function ($item, $key) use ($occasion, $recipientName, $imageSize, $usersMessage, $personalMessages) {
+        return $urls->map(function ($item, $key) use ($user, $occasion, $recipientName, $imageSize, $usersMessage, $personalMessages) {
+            $baseUrl = '/' . $user->id;
             $fileName = date('Y-m-dH:i:s') . uniqid() . '.png';
-            $temporaryFilePath = '/e-card/temporary/' . $fileName;
+            $temporaryFilePath = $baseUrl . '/e-cards/temporary/' . $fileName;
 
             $header = preg_replace('/xxx/i', $recipientName, $personalMessages[$key]['header']);
             $message = $usersMessage ?? preg_replace('/xxx/i', $recipientName, $personalMessages[$key]['message']);
@@ -40,13 +42,7 @@ class CompileECardsAction
 
             $fontColour = ECardOccasionEnum::from($occasion)->fontColour();
 
-            Storage::put($temporaryFilePath, file_get_contents($item['url']), [
-                'Metadata' => [
-                    'header' => $header,
-                    'message' => $message,
-                    'fontColour' => $fontColour,
-                ],
-            ]);
+            Storage::put($temporaryFilePath, file_get_contents($item['url']));
 
             $img->text($header, $xCoordinate, 10, function ($font) use ($fontColour, $headerFontSize) {
                 $font->file(public_path('fonts/Fraset-Display.ttf'));
@@ -66,7 +62,7 @@ class CompileECardsAction
 
             $img->resize(256, 256);
 
-            $temporaryThumbnailPath = '/e-card/thumbnail/temporary/' . $fileName;
+            $temporaryThumbnailPath = $baseUrl . '/e-cards/thumbnails/temporary/' . $fileName;
 
             Storage::put($temporaryThumbnailPath, $img->stream());
 
