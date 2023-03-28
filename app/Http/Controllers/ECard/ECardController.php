@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ECard\ECardStoreRequest;
 use App\Models\ECard;
 use App\Models\ECardInformation;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Storage;
 
 class ECardController extends Controller
@@ -33,7 +32,7 @@ class ECardController extends Controller
         $assets = collect([
             'header' => $request->header,
             'message' => $request->message,
-            'font_colour' => $request->fontColour,
+            'font_colour' => $request->font_colour,
         ]);
 
         $eCard = $user->eCards()->save(
@@ -51,6 +50,6 @@ class ECardController extends Controller
             ])
         );
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return response()->json(['success' => 'success', 200]);
     }
 }
