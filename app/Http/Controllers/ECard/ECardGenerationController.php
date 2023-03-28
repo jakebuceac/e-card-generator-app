@@ -43,8 +43,6 @@ class ECardGenerationController extends Controller
             $request->personal_message,
         );
 
-        $request->session()->put('images', $images);
-
         return Inertia::render('ECard/Generate/ShowNewECards', [
             'images' => $images,
         ]);

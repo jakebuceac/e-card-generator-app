@@ -5,11 +5,14 @@ namespace Tests\Feature\ECard;
 use App\Enum\ECardOccasionEnum;
 use App\Enum\ECardSizeEnum;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class GenerationTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_generate_form_page_is_displayed(): void
     {
         $user = User::factory()->create();

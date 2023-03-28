@@ -22,10 +22,16 @@ export default function ShowNewECards({ auth, images }) {
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 justify-center  mt-2.5">
                             {keys.map((key) => (
                                 <div className="mx-auto">
-                                    <Link href={route('e-card.edit.create', images[key]['fileName'])}>
-                                    <img
-                                        src={images[key]['url']}
-                                        alt="image"/>
+                                    <Link href={route('e-card.store')} method="post" data={{
+                                        name: images[key]['name'],
+                                        occasion: images[key]['occasion'],
+                                        header: images[key]['header'],
+                                        message: images[key]['message'],
+                                        font_colour: images[key]['font_colour'],
+                                    }}>
+                                        <img
+                                            src={images[key]['thumbnail_url']}
+                                            alt="image"/>
                                     </Link>
                                 </div>
                             ))}
