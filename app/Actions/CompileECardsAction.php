@@ -68,11 +68,12 @@ class CompileECardsAction
             Storage::put($temporaryThumbnailPath, $img->stream());
 
             return [
-                'fileName' => $fileName,
-                'url' => Storage::url($temporaryThumbnailPath),
+                'name' => $fileName,
+                'thumbnail_url' => Storage::url($temporaryThumbnailPath),
+                'occasion' => $occasion,
                 'header' => $header,
                 'message' => $message,
-                'fontColour' => $fontColour,
+                'font_colour' => $fontColour,
             ];
         });
     }

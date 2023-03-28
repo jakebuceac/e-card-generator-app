@@ -11,13 +11,16 @@ class RemoveTemporaryFilesAction
      *
      * @param string $oldFilePath
      * @param string $newFilePath
+     * @param string $oldThumbnailPath
+     * @param string $newThumbnailPath
      * @param string $temporaryFilesBaseUrl
      * @param string $temporaryThumbnailsBaseUrl
      * @return void
      */
-    public function execute(string $oldFilePath, string $newFilePath, string $temporaryFilesBaseUrl, string $temporaryThumbnailsBaseUrl): void
+    public function execute(string $oldFilePath, string $newFilePath, string $oldThumbnailPath, string $newThumbnailPath, string $temporaryFilesBaseUrl, string $temporaryThumbnailsBaseUrl): void
     {
         Storage::move($oldFilePath, $newFilePath);
+        Storage::move($oldThumbnailPath, $newThumbnailPath);
 
         $usersTemporaryFiles = Storage::allFiles($temporaryFilesBaseUrl);
         $usersTemporaryThumbnails = Storage::allFiles($temporaryThumbnailsBaseUrl);
