@@ -12,7 +12,7 @@ use App\Services\OpenAiApiService;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class GenerationController extends Controller
+class ECardGenerationController extends Controller
 {
     public function create(): Response
     {
@@ -39,9 +39,11 @@ class GenerationController extends Controller
             $request->occasion,
             $request->image_size,
             $request->recipient_name,
+            $personalMessages,
             $request->personal_message,
-            $personalMessages
         );
+
+        $request->session()->put('images', $images);
 
         return Inertia::render('ECard/Generate/ShowNewECards', [
             'images' => $images,
