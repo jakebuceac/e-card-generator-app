@@ -34,6 +34,7 @@ class GenerationTest extends TestCase
                 'recipient_name' => 'Test User',
                 'image_size' => ECardSizeEnum::SMALL->value,
                 'occasion' => ECardOccasionEnum::EASTER->value,
+                'additional_prompt_details' => 'test prompt',
                 'personal_message' => 'test message',
             ]);
 
@@ -49,5 +50,19 @@ class GenerationTest extends TestCase
 
         $this->assertTrue(count(Storage::allFiles($eCardsTemporaryPath)) === 6);
         $this->assertTrue(count(Storage::allFiles($thumbnailsTemporaryPath)) === 6);
+    }
+
+    public function test_e_card_form_fields_must_be_provided()
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post('/e-card/generate');
+
+        $response
+            ->assertSessionHasErrors('recipient_name')
+            ->assertSessionHasErrors('image_size')
+            ->assertSessionHasErrors('occasion');
     }
 }

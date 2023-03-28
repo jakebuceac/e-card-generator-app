@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react';
+import {Head, Link} from '@inertiajs/react';
 import Authenticated from "@/Layouts/AuthenticatedLayout";
 
 export default function ShowNewECards({ auth, images }) {
@@ -10,7 +10,7 @@ export default function ShowNewECards({ auth, images }) {
             mainClassName="mt-auto flex justify-center items-center sm:pt-0"
         >
 
-            <Head title="Generate E-Card" />
+            <Head title="Completed Personalised E-Cards" />
 
             <div className="w-full sm:max-w-screen-lg bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div className="sm:px-6 lg:px-8">
@@ -22,9 +22,11 @@ export default function ShowNewECards({ auth, images }) {
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 justify-center  mt-2.5">
                             {keys.map((key) => (
                                 <div className="mx-auto">
+                                    <Link href={route('e-card.edit.create', images[key]['fileName'])}>
                                     <img
                                         src={images[key]['url']}
                                         alt="image"/>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

@@ -14,15 +14,16 @@ class CompileECardsAction
     /**
      * Add personalised message to images.
      *
+     * @param User $user
      * @param Collection $urls
      * @param string $occasion
      * @param string $imageSize
      * @param string $recipientName
+     * @param Collection $personalMessages
      * @param string|null $usersMessage
-     * @param $personalMessages
      * @return Collection
      */
-    public function execute(User $user, Collection $urls, string $occasion, string $imageSize, string $recipientName, string $usersMessage = null, $personalMessages): Collection
+    public function execute(User $user, Collection $urls, string $occasion, string $imageSize, string $recipientName, Collection $personalMessages, string $usersMessage = null): Collection
     {
         return $urls->map(function ($item, $key) use ($user, $occasion, $recipientName, $imageSize, $usersMessage, $personalMessages) {
             $baseUrl = '/' . $user->id;
