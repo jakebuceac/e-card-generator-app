@@ -14,6 +14,7 @@ return new class extends Migration {
         Schema::create('e_cards', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class);
+            $table->string('name');
             $table->string('thumbnail_url');
             $table->integer('size');
             $table->string('occasion');

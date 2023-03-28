@@ -38,7 +38,7 @@ class StoreTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertOk();
+            ->assertRedirect('/e-card/edit/Test_256x256.png');
 
         $eCardsTemporaryPath = '/' . $user->id . '/e-cards/temporary/';
         $thumbnailsTemporaryPath = '/' . $user->id . '/e-cards/thumbnails/temporary/';
@@ -75,13 +75,14 @@ class StoreTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertOk();
+            ->assertRedirect('/e-card/edit/Test_256x256.png');
 
         $eCardPath = '/' . $user->id . '/e-cards/Test_256x256.png';
         $thumbnailPath = '/' . $user->id . '/e-cards/thumbnails/Test_256x256.png';
 
         $this->assertDatabaseHas('e_cards', [
             'user_id' => $user->id,
+            'name' => 'Test_256x256.png',
             'thumbnail_url' => Storage::url($thumbnailPath),
             'size' => Storage::size($eCardPath),
             'occasion' => ECardOccasionEnum::EASTER->value,

@@ -37,6 +37,7 @@ class ECardController extends Controller
 
         $eCard = $user->eCards()->save(
             new ECard([
+                'name' => $request->name,
                 'thumbnail_url' => Storage::url($thumbnailPath),
                 'size' => Storage::size($filePath),
                 'occasion' => $request->occasion,
@@ -50,6 +51,6 @@ class ECardController extends Controller
             ])
         );
 
-        return response()->json(['success' => 'success', 200]);
+        return redirect('/e-card/edit/' . $request->name);
     }
 }
