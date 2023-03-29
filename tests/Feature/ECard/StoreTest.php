@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\ECard;
 
+use App\Actions\CreateDefaultDesignStateAction;
 use App\Enum\ECardOccasionEnum;
 use App\Models\ECard;
 use App\Models\User;
@@ -31,14 +32,17 @@ class StoreTest extends TestCase
             ->post('/e-card', [
                 'name' => 'Test_256x256.png',
                 'occasion' => ECardOccasionEnum::EASTER->value,
+                'image_size' => '256x256',
                 'header' => 'test header',
                 'message' => 'test message',
                 'font_colour' => '#000000',
             ]);
 
+        $eCard = ECard::with('eCardInformation')->where('name', '=', 'Test_256x256.png')->first();
+
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/e-card/edit/Test_256x256.png');
+            ->assertRedirect('/e-card/' . $eCard->eCardInformation->id);
 
         $eCardsTemporaryPath = '/' . $user->id . '/e-cards/temporary/';
         $thumbnailsTemporaryPath = '/' . $user->id . '/e-cards/thumbnails/temporary/';
@@ -68,14 +72,17 @@ class StoreTest extends TestCase
             ->post('/e-card', [
                 'name' => 'Test_256x256.png',
                 'occasion' => ECardOccasionEnum::EASTER->value,
+                'image_size' => '256x256',
                 'header' => 'test header',
                 'message' => 'test message',
                 'font_colour' => '#000000',
             ]);
 
+        $eCard = ECard::with('eCardInformation')->where('name', '=', 'Test_256x256.png')->first();
+
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/e-card/edit/Test_256x256.png');
+            ->assertRedirect('/e-card/' . $eCard->eCardInformation->id);
 
         $eCardPath = '/' . $user->id . '/e-cards/Test_256x256.png';
         $thumbnailPath = '/' . $user->id . '/e-cards/thumbnails/Test_256x256.png';
@@ -84,14 +91,19 @@ class StoreTest extends TestCase
             'user_id' => $user->id,
             'name' => 'Test_256x256.png',
             'thumbnail_url' => Storage::url($thumbnailPath),
-            'size' => Storage::size($eCardPath),
+            'size' => '256x256',
             'occasion' => ECardOccasionEnum::EASTER->value,
         ]);
 
         $eCard = ECard::where('user_id', '=', $user->id)->first();
 
-        $assets = collect(['header' => 'test header', 'message' => 'test message', 'font_colour' => '#000000'])->toArray();
-
+        $assets = (new CreateDefaultDesignStateAction())->execute(
+            Storage::url($eCardPath),
+            'test header',
+            'test message',
+            ECardOccasionEnum::EASTER->value,
+            '256x256',
+        );
         $this->assertDatabaseHas('e_card_information', [
             'e_card_id' => $eCard->id,
             'image_url' => Storage::url($eCardPath),

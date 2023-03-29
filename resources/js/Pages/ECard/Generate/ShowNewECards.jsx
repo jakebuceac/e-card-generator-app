@@ -24,6 +24,7 @@ export default function ShowNewECards({ auth, images }) {
                                 <div className="mx-auto">
                                     <Link href={route('e-card.store')} method="post" data={{
                                         name: images[key]['name'],
+                                        image_size: images[key]['size'],
                                         occasion: images[key]['occasion'],
                                         header: images[key]['header'],
                                         message: images[key]['message'],
