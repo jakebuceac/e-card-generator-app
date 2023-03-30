@@ -61,8 +61,6 @@ class CompileECardsAction
                 $font->color($fontColour);
             });
 
-            $img->resize(256, 256);
-
             $temporaryThumbnailPath = $baseUrl . '/e-cards/thumbnails/temporary/' . $fileName;
 
             Storage::put($temporaryThumbnailPath, $img->stream());
