@@ -3,12 +3,17 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link } from '@inertiajs/react';
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
+import background from "@/Assests/background.png";
 
 export default function Guest({ header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
+        <div className="min-h-screen flex flex-col bg-auto bg-center" style={
+            {
+                backgroundImage: 'url(' + background + ')',
+            }
+        }>
             <nav className="bg-white shadow border-b-2 border-indigo-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-center h-16">
@@ -21,6 +26,7 @@ export default function Guest({ header, children }) {
 
                             <div className="sm:absolute sm:top-0 sm:right-0 py-5 text-right">
                                 <NavLink
+                                    href={route('e-card.generation.create')}
                                     className="font-semibold text-gray-400 hover:text-gray-900 hidden md:inline-flex"
                                 >
                                     Generate E-Card
@@ -28,21 +34,21 @@ export default function Guest({ header, children }) {
 
                                 <NavLink
                                     href={route('login')}
-                                    className="ml-10 font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
+                                    className="ml-10 font-semibold text-gray-400 hover:text-gray-900 hidden md:inline-flex"
                                 >
                                     Log in
                                 </NavLink>
 
                                 <NavLink
                                     href={route('register')}
-                                    className="mx-10 font-semibold text-gray-400 hover:text-gray-900 hidden sm:inline-flex"
+                                    className="mx-10 font-semibold text-gray-400 hover:text-gray-900 hidden md:inline-flex"
                                 >
                                     Register
                                 </NavLink>
                             </div>
                         </div>
 
-                        <div className="absolute py-3.5 mr-5 right-0 text-right sm:hidden">
+                        <div className="absolute py-3.5 mr-5 right-0 text-right md:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                                 className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
@@ -72,7 +78,7 @@ export default function Guest({ header, children }) {
                     <div className="pt-2 pb-3 border-b border-gray-200">
 
                         <div className="mt-3 border-t-4 border-gray-300 space-y-2">
-                            <ResponsiveNavLink>Generate E-Card</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('e-card.generation.create')}>Generate E-Card</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('login')}>Login</ResponsiveNavLink>
                             <ResponsiveNavLink href={route('register')}>Register</ResponsiveNavLink>
                         </div>

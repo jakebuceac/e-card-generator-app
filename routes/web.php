@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ECard\ECardController;
+use App\Http\Controllers\ECard\ECardGenerationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -25,11 +27,18 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+
+    Route::get('/e-card/generate', [ECardGenerationController::class, 'create'])->name('e-card.generation.create');
+    Route::post('/e-card/generate', [ECardGenerationController::class, 'store'])->name('e-card.generation.store');
+
+    Route::get('/e-card/{eCard}', [ECardController::class, 'create'])->name('e-card.edit.create');
+    Route::post('/e-card', [ECardController::class, 'store'])->name('e-card.store');
+    Route::put('/e-card/{eCard}', [ECardController::class, 'update'])->name('e-card.update');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
