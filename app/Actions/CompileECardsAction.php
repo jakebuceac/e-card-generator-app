@@ -43,7 +43,7 @@ class CompileECardsAction
 
             $fontColour = ECardOccasionEnum::from($occasion)->fontColour();
 
-            Storage::put($temporaryFilePath, file_get_contents($item['url']));
+            Storage::put($temporaryFilePath, file_get_contents($item['url']), 'public');
 
             $img->text($header, $xCoordinate, 10, function ($font) use ($fontColour, $headerFontSize) {
                 $font->file(public_path('fonts/Lobster-Regular.ttf'));
@@ -63,7 +63,7 @@ class CompileECardsAction
 
             $temporaryThumbnailPath = $baseUrl . '/e-cards/thumbnails/temporary/' . $fileName;
 
-            Storage::put($temporaryThumbnailPath, $img->stream());
+            Storage::put($temporaryThumbnailPath, $img->stream(), 'public');
 
             return [
                 'name' => $fileName,
