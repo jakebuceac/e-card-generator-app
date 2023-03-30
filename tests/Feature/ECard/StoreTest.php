@@ -42,7 +42,7 @@ class StoreTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/e-card/' . $eCard->eCardInformation->id);
+            ->assertRedirect('/e-card/' . $eCard->id);
 
         $eCardsTemporaryPath = '/' . $user->id . '/e-cards/temporary/';
         $thumbnailsTemporaryPath = '/' . $user->id . '/e-cards/thumbnails/temporary/';
@@ -82,7 +82,7 @@ class StoreTest extends TestCase
 
         $response
             ->assertSessionHasNoErrors()
-            ->assertRedirect('/e-card/' . $eCard->eCardInformation->id);
+            ->assertRedirect('/e-card/' . $eCard->id);
 
         $eCardPath = '/' . $user->id . '/e-cards/Test_256x256.png';
         $thumbnailPath = '/' . $user->id . '/e-cards/thumbnails/Test_256x256.png';
