@@ -127,7 +127,7 @@ export default function GenerateForm({ auth, image_sizes, occasions }) {
                                 />
 
                                 <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500 dark:text-gray-400">
-                                    Provide extra details, keywords or phrases related to your e-card to enhance the generation process. <br/>
+                                    To enhance the generation process provide extra details related to your e-card. <br/>
                                 </p>
                                 <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                                     Example for a Christmas Card: "Add snowmen to the background."
