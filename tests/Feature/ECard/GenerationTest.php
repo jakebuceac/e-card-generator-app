@@ -21,7 +21,9 @@ class GenerationTest extends TestCase
             ->actingAs($user)
             ->get('/e-card/generate');
 
-        $response->assertOk();
+        $response
+            ->assertOk()
+            ->assertSessionHasNoErrors();
     }
 
     public function test_e_cards_can_be_generated(): void
