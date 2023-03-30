@@ -22,7 +22,7 @@ class ConvertBase64ToImageAction
 
         $thumbnailPath = '/' . $user->id . '/e-cards/thumbnails/' . uniqid() . $filename;
 
-        Storage::put($thumbnailPath, $img->stream());
+        Storage::put($thumbnailPath, $img->stream(), 'public');
 
         return Storage::url($thumbnailPath);
     }

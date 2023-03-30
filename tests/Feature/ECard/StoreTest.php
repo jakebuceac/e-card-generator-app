@@ -16,7 +16,7 @@ class StoreTest extends TestCase
 
     public function test_temporary_e_cards_are_deleted(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()->create();
 
@@ -24,8 +24,8 @@ class StoreTest extends TestCase
         $temporaryFilePath = '/' . $user->id . '/e-cards/temporary/Test_256x256.png';
         $thumbnailTemporaryFilePath = '/' . $user->id . '/e-cards/thumbnails/temporary/Test_256x256.png';
 
-        Storage::put($temporaryFilePath, file_get_contents($testFilePath));
-        Storage::put($thumbnailTemporaryFilePath, file_get_contents($testFilePath));
+        Storage::put($temporaryFilePath, file_get_contents($testFilePath), 'public');
+        Storage::put($thumbnailTemporaryFilePath, file_get_contents($testFilePath), 'public');
 
         $response = $this
             ->actingAs($user)
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
 
     public function test_e_cards_are_stored_on_database(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()->create();
 
@@ -64,8 +64,8 @@ class StoreTest extends TestCase
         $temporaryFilePath = '/' . $user->id . '/e-cards/temporary/Test_256x256.png';
         $thumbnailTemporaryFilePath = '/' . $user->id . '/e-cards/thumbnails/temporary/Test_256x256.png';
 
-        Storage::put($temporaryFilePath, file_get_contents($testFilePath));
-        Storage::put($thumbnailTemporaryFilePath, file_get_contents($testFilePath));
+        Storage::put($temporaryFilePath, file_get_contents($testFilePath), 'public');
+        Storage::put($thumbnailTemporaryFilePath, file_get_contents($testFilePath), 'public');
 
         $response = $this
             ->actingAs($user)
