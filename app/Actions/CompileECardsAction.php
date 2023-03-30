@@ -46,7 +46,7 @@ class CompileECardsAction
             Storage::put($temporaryFilePath, file_get_contents($item['url']));
 
             $img->text($header, $xCoordinate, 10, function ($font) use ($fontColour, $headerFontSize) {
-                $font->file(public_path('fonts/Fraset-Display.ttf'));
+                $font->file(public_path('fonts/Lobster-Regular.ttf'));
                 $font->size($headerFontSize);
                 $font->align('center');
                 $font->valign('top');
@@ -54,14 +54,12 @@ class CompileECardsAction
             });
 
             $img->text($message, $xCoordinate, $yCoordinate, function ($font) use ($fontColour, $messageFontSize) {
-                $font->file(public_path('fonts/Fraset-Display.ttf'));
+                $font->file(public_path('fonts/Lobster-Regular.ttf'));
                 $font->size($messageFontSize);
                 $font->align('center');
                 $font->valign('bottom');
                 $font->color($fontColour);
             });
-
-            $img->resize(256, 256);
 
             $temporaryThumbnailPath = $baseUrl . '/e-cards/thumbnails/temporary/' . $fileName;
 
@@ -69,6 +67,7 @@ class CompileECardsAction
 
             return [
                 'name' => $fileName,
+                'size' => $imageSize,
                 'thumbnail_url' => Storage::url($temporaryThumbnailPath),
                 'occasion' => $occasion,
                 'header' => $header,

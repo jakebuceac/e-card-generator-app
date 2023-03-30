@@ -35,7 +35,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/e-card/generate', [ECardGenerationController::class, 'create'])->name('e-card.generation.create');
     Route::post('/e-card/generate', [ECardGenerationController::class, 'store'])->name('e-card.generation.store');
 
+    Route::get('/e-card/{eCard}', [ECardController::class, 'create'])->name('e-card.edit.create');
     Route::post('/e-card', [ECardController::class, 'store'])->name('e-card.store');
+    Route::put('/e-card/{eCard}', [ECardController::class, 'update'])->name('e-card.update');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

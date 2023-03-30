@@ -3,6 +3,7 @@
 namespace App\Http\Requests\ECard;
 
 use App\Enum\ECardOccasionEnum;
+use App\Enum\ECardSizeEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -17,6 +18,7 @@ class ECardStoreRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
+            'image_size' => [new Enum(ECardSizeEnum::class), 'required'],
             'occasion' => [new Enum(ECardOccasionEnum::class), 'required'],
             'header' => 'required|string|max:255',
             'message' => 'required|string|max:255',

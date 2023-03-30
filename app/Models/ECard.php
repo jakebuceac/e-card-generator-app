@@ -17,6 +17,7 @@ class ECard extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
         'thumbnail_url',
         'size',
         'occasion',
