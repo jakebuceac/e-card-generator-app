@@ -27,7 +27,7 @@ class ECardController extends Controller
      */
     public function create(ECard $eCard): Response
     {
-        $this->authorize('update', $eCard);
+        $this->authorize('create', $eCard);
 
         $eCardInformation = $eCard->eCardInformation;
 

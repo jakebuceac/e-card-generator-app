@@ -110,4 +110,21 @@ class StoreTest extends TestCase
             'assets' => $this->castAsJson($assets),
         ]);
     }
+
+    public function test_e_card_fields_must_be_provided(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this
+            ->actingAs($user)
+            ->post('/e-card');
+
+        $response
+            ->assertSessionHasErrors('name')
+            ->assertSessionHasErrors('occasion')
+            ->assertSessionHasErrors('image_size')
+            ->assertSessionHasErrors('header')
+            ->assertSessionHasErrors('message')
+            ->assertSessionHasErrors('font_colour');
+    }
 }
