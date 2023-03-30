@@ -28,7 +28,7 @@ class GenerationTest extends TestCase
 
     public function test_e_cards_can_be_generated(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $this->seed();
         $user = User::factory()->create();

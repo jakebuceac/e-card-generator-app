@@ -34,6 +34,7 @@ jobs:
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
+        FILESYSTEM_DISK: spaces
         OPENAI_API_URL: https://api.openai.com/v1
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite

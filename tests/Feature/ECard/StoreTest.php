@@ -16,7 +16,7 @@ class StoreTest extends TestCase
 
     public function test_temporary_e_cards_are_deleted(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()->create();
 
@@ -56,7 +56,7 @@ class StoreTest extends TestCase
 
     public function test_e_cards_are_stored_on_database(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()->create();
 

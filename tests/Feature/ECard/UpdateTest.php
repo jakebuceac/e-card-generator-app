@@ -13,7 +13,7 @@ class UpdateTest extends TestCase
 {
     public function test_e_card_information_gets_updated(): void
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()
             ->has(
@@ -53,9 +53,9 @@ class UpdateTest extends TestCase
         ]);
     }
 
-    public function test_e_card_is_store_on_s3()
+    public function test_e_card_is_stored_on_spaces()
     {
-        Storage::fake('s3');
+        Storage::fake('spaces');
 
         $user = User::factory()
             ->has(
@@ -92,7 +92,7 @@ class UpdateTest extends TestCase
         $this->assertTrue(count(Storage::allFiles($thumbnailsPath)) === 1);
     }
 
-    public function test_users_see_403_if_trying_to_update_an_e_card_not_made_by_them()
+    public function test_users_see_403_when_trying_to_update_an_e_card_not_made_by_them()
     {
         $user = User::factory()
             ->has(
