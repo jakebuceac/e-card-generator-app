@@ -13,8 +13,6 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
         })
             .then(function (response) {
                 saveAs(response.data, filename);
-
-                window.location.reload();
             })
             .catch(function (error) {
                 console.log(error);
