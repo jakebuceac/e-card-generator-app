@@ -19,9 +19,9 @@ export default function ShowNewECards({ auth, images }) {
                             <h2 className="font-semibold text-xl text-gray-800 leading-tight">Completed Personalised E-Cards</h2>
                         </div>
 
-                        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-2 justify-center  mt-2.5">
+                        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-1 justify-center mt-2.5">
                             {keys.map((key) => (
-                                <div className="mx-auto">
+                                <div className="hover:border-indigo-400 border-solid border-2 rounded-lg">
                                     <Link href={route('e-card.store')} method="post" data={{
                                         name: images[key]['name'],
                                         image_size: images[key]['size'],
