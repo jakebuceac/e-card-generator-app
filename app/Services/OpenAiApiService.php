@@ -23,22 +23,22 @@ class OpenAiApiService
                 'created' => now()->toDateTime(),
                 'data' => [
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                     [
-                        'url' => base_path('tests/Stubs/Test_256x256.png'),
+                        'url' => base_path('tests/Stubs/Test_512x512.png'),
                     ],
                 ],
             ]);
@@ -58,19 +58,18 @@ class OpenAiApiService
      * Get generated images.
      *
      * @param string $occasion
-     * @param string $imageSize
      * @param string|null $additionalPromptDetails
      * @return Collection
      * @throws OpenAiException
      */
-    public function generateImages(string $occasion, string $imageSize, string $additionalPromptDetails = null): Collection
+    public function generateImages(string $occasion, string $additionalPromptDetails = null): Collection
     {
         $prompt = $additionalPromptDetails ? ECardOccasionEnum::from($occasion)->prompt() . ' ' . $additionalPromptDetails : ECardOccasionEnum::from($occasion)->prompt();
         $response = $this->httpClient
             ->post('/images/generations', [
                 'prompt' => $prompt,
                 'n' => 6,
-                'size' => $imageSize,
+                'size' => '512x512',
             ]);
 
         if ($response->failed()) {
