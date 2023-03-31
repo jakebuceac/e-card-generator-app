@@ -41,6 +41,8 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
                             (editedImageObject, designState) => {
                                 onSave(designState, editedImageObject.imageBase64, editedImageObject.fullName, editedImageObject.width, editedImageObject.height);
 
+                                window.location.reload();
+
                                 console.log('finished');
                             }}
                             annotationsCommon={{
