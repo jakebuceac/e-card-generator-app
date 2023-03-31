@@ -5,6 +5,8 @@ import { saveAs } from 'file-saver'
 
 export default function Edit({ auth, id, name, image_url, design_state }) {
     function onSave(design_state, image_base_64, filename, width, height) {
+        const base_url = window.location.origin;
+
         axios.put('/e-card/' + id, {
             design_state: JSON.stringify(design_state),
             filename: filename,
@@ -17,6 +19,8 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
             .catch(function (error) {
                 console.log(error);
             });
+
+        return window.location.href = base_url + '/dashboard';
     }
 
     return (
@@ -40,8 +44,6 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
                             onSave={
                             (editedImageObject, designState) => {
                                 onSave(designState, editedImageObject.imageBase64, editedImageObject.fullName, editedImageObject.width, editedImageObject.height);
-
-                                window.location.reload();
 
                                 console.log('finished');
                             }}
