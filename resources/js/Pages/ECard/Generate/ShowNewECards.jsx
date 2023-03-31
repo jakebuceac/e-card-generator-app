@@ -31,6 +31,7 @@ export default function ShowNewECards({ auth, images }) {
                                         font_colour: images[key]['font_colour'],
                                     }}>
                                         <img
+                                            className="rounded-lg"
                                             src={images[key]['thumbnail_url']}
                                             alt="image"/>
                                     </Link>
