@@ -13,8 +13,7 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
         })
             .then(function (response) {
                 saveAs(response.data, filename);
-
-                window.location.reload();
+                name = filename;
             })
             .catch(function (error) {
                 console.log(error);
@@ -30,11 +29,6 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
             <div className="w-full sm:max-w-screen-sm bg-white shadow-md overflow-hidden sm:rounded-lg">
                 <div className="sm:px-6 lg:px-8">
                     <div className="px-6 py-4">
-                        <header className="bg-white">
-                            <div className="max-w-7xl mx-auto py-6 text-center">
-                                <h2 className="font-semibold text-xl text-gray-800 leading-tight">{name}</h2>
-                            </div>
-                        </header>
                         <FilerobotImageEditor
                             defaultSavedImageName={name}
                             loadableDesignState={design_state}
