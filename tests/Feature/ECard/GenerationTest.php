@@ -3,7 +3,6 @@
 namespace Tests\Feature\ECard;
 
 use App\Enum\ECardOccasionEnum;
-use App\Enum\ECardSizeEnum;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +36,6 @@ class GenerationTest extends TestCase
             ->actingAs($user)
             ->post('/e-card/generate', [
                 'recipient_name' => 'Test User',
-                'image_size' => ECardSizeEnum::SMALL->value,
                 'occasion' => ECardOccasionEnum::EASTER->value,
                 'additional_prompt_details' => 'test prompt',
                 'personal_message' => 'test message',
@@ -67,7 +65,6 @@ class GenerationTest extends TestCase
 
         $response
             ->assertSessionHasErrors('recipient_name')
-            ->assertSessionHasErrors('image_size')
             ->assertSessionHasErrors('occasion');
     }
 }

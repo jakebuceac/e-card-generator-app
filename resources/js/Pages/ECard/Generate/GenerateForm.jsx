@@ -8,10 +8,9 @@ import SelectInput from "@/Components/SelectInput";
 import {useState} from "react";
 import Spinner from "@/Components/Spinner";
 
-export default function GenerateForm({ auth, image_sizes, occasions }) {
+export default function GenerateForm({ auth, occasions }) {
     const { data, setData, post, processing, errors } = useForm({
         recipient_name: '',
-        image_size: '',
         occasion: '',
         additional_prompt_details: '',
         personal_message: '',
@@ -77,23 +76,6 @@ export default function GenerateForm({ auth, image_sizes, occasions }) {
                                 />
 
                                 <InputError message={errors.recipient_name} className="mt-2" />
-                            </div>
-
-                            <div className="mt-4">
-                                <InputLabel htmlFor="image_size" value="Image Size*" />
-
-                                <SelectInput
-                                    id="image_size"
-                                    name="image_size"
-                                    value={data.image_size}
-                                    options={image_sizes}
-                                    className="mt-1 block w-full"
-                                    onChange={handleOnChange}
-                                    isFocused={true}
-                                    required
-                                />
-
-                                <InputError message={errors.image_size} className="mt-2" />
                             </div>
 
                             <div className="mt-4">

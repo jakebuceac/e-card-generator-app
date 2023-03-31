@@ -31,13 +31,13 @@ class ECardGenerationController extends Controller
             ->limit(6)
             ->get();
 
-        $generatedImages = $openaiApiService->generateImages($request->occasion, $request->image_size, $request->additional_prompt_details);
+        $generatedImages = $openaiApiService->generateImages($request->occasion, $request->additional_prompt_details);
 
         $images = (new CompileECardsAction())->execute(
             $user,
             $generatedImages,
             $request->occasion,
-            $request->image_size,
+            '512x512',
             $request->recipient_name,
             $personalMessages,
             $request->personal_message,
