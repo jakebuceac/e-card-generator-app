@@ -21,7 +21,7 @@ export default function ShowNewECards({ auth, images }) {
 
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-1 justify-center mt-2.5">
                             {keys.map((key) => (
-                                <div className="hover:border-indigo-400 border-solid border-2 rounded-lg">
+                                <div className="hover:border-indigo-400 border-solid border-2 rounded-lg" key={key}>
                                     <Link href={route('e-card.store')} method="post" data={{
                                         name: images[key]['name'],
                                         image_size: images[key]['size'],

@@ -23,7 +23,7 @@ class ECardFactory extends Factory
             'user_id' => User::factory(),
             'name' => fake()->name(),
             'thumbnail_url' => fake()->imageUrl(),
-            'size' => ECardSizeEnum::SMALL->value,
+            'size' => ECardSizeEnum::MEDIUM->value,
             'occasion' => ECardOccasionEnum::BIRTHDAY->value,
         ];
     }
