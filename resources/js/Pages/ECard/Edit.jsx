@@ -3,9 +3,12 @@ import Authenticated from "@/Layouts/AuthenticatedLayout";
 import FilerobotImageEditor, { TABS, TOOLS} from 'react-filerobot-image-editor';
 import { saveAs } from 'file-saver'
 
-export default function Edit({ auth, id, name, image_url, design_state }) {
+export default function Edit({ auth, e_card}) {
+    const e_card_data = e_card.data;
+    const e_card_information_data = e_card_data.relationships.e_card_information;
+
     function onSave(design_state, image_base_64, filename, width, height) {
-        axios.put('/e-card/' + id, {
+        axios.put('/e-card/' + e_card_data.id, {
             design_state: JSON.stringify(design_state),
             filename: filename,
             image_base_64: image_base_64,
@@ -13,7 +16,7 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
         })
             .then(function (response) {
                 saveAs(response.data, filename);
-                name = filename;
+                e_card_data.attributes.name = filename;
             })
             .catch(function (error) {
                 console.log(error);
@@ -30,9 +33,9 @@ export default function Edit({ auth, id, name, image_url, design_state }) {
                 <div className="sm:px-6 lg:px-8">
                     <div className="px-6 py-4">
                         <FilerobotImageEditor
-                            defaultSavedImageName={name}
-                            loadableDesignState={design_state}
-                            source={image_url}
+                            defaultSavedImageName={e_card_data.attributes.name}
+                            loadableDesignState={e_card_information_data.attributes.assets}
+                            source={e_card_information_data.attributes.image_url}
                             onSave={
                             (editedImageObject, designState) => {
                                 onSave(designState, editedImageObject.imageBase64, editedImageObject.fullName, editedImageObject.width, editedImageObject.height);

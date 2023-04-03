@@ -31,13 +31,8 @@ class ECardController extends Controller
     {
         $this->authorize('create', $eCard);
 
-        $eCardInformation = $eCard->eCardInformation;
-
         return Inertia::render('ECard/Edit', [
-            'id' => $eCard->id,
-            'name' => $eCard->name,
-            'image_url' => $eCardInformation->image_url,
-            'design_state' => json_decode($eCardInformation->assets),
+            'e_card' => ECardResource::make($eCard),
         ]);
     }
 
