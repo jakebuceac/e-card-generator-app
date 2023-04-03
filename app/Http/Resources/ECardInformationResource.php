@@ -19,7 +19,7 @@ class ECardInformationResource extends JsonResource
             'id' => $this->id,
             'attributes' => [
                 'image_url' => $this->image_url,
-                'assets' => $this->assets,
+                'assets' => json_decode($this->assets),
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
             ],
