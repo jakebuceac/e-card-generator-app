@@ -28,9 +28,7 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [ECardController::class, 'index'])->name('dashboard');
 
     Route::get('/e-card/generate', [ECardGenerationController::class, 'create'])->name('e-card.generation.create');
     Route::post('/e-card/generate', [ECardGenerationController::class, 'store'])->name('e-card.generation.store');
