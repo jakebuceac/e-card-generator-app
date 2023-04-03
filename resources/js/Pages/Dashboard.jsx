@@ -17,10 +17,10 @@ export default function Dashboard(props) {
                             <h2 className="font-semibold text-xl text-gray-800 leading-tight">Your Recent E-Cards</h2>
                         </div>
                         <div className="text-center">
-                            <p className="text-sm text-gray-600">Seems you don't have any E-Cards!</p>
+                            <p className="text-sm text-gray-600 mb-20">Seems you don't have any E-Cards!</p>
 
                             <Link href={route('e-card.generation.create')}>
-                                <PrimaryButton className="mt-6 py-4 px-14">
+                                <PrimaryButton className="mt-20 py-4 px-14">
                                     Generate E-Card
                                 </PrimaryButton>
                             </Link>
