@@ -88,11 +88,15 @@ class ECardController extends Controller
         return redirect('/e-card/' . $eCardInformation->id);
     }
 
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
         $user = $request->user();
 
-        return ECardResource::make($user->eCard()->all());
+        return $user->eCards()->exists() ?
+            Inertia::render('ECard/Index', [
+                'e_cards' => ECardResource::collection($user->eCards()->get()),
+            ]) :
+            Inertia::render('Dashboard');
     }
 
     public function update(ECardUpdateRequest $request, ECard $eCard): string
