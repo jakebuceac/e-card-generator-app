@@ -8,11 +8,13 @@ use App\Actions\RemoveTemporaryFilesAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ECard\ECardStoreRequest;
 use App\Http\Requests\ECard\ECardUpdateRequest;
+use App\Http\Resources\ECardResource;
 use App\Models\ECard;
 use App\Models\ECardInformation;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -89,6 +91,13 @@ class ECardController extends Controller
         );
 
         return redirect('/e-card/' . $eCardInformation->id);
+    }
+
+    public function index(Request $request)
+    {
+        $user = $request->user();
+
+        return ECardResource::make($user->eCard()->all());
     }
 
     public function update(ECardUpdateRequest $request, ECard $eCard): string
