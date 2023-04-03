@@ -50,8 +50,8 @@ class StoreTest extends TestCase
         $this->assertTrue(Storage::exists($eCardsTemporaryPath));
         $this->assertTrue(Storage::exists($thumbnailsTemporaryPath));
 
-        $this->assertTrue(count(Storage::allFiles($eCardsTemporaryPath)) === 0);
-        $this->assertTrue(count(Storage::allFiles($thumbnailsTemporaryPath)) === 0);
+        $this->assertEmpty(Storage::allFiles($eCardsTemporaryPath));
+        $this->assertEmpty(Storage::allFiles($thumbnailsTemporaryPath));
     }
 
     public function test_e_cards_are_stored_on_database(): void

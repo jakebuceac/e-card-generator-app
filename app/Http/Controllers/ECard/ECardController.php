@@ -36,6 +36,10 @@ class ECardController extends Controller
         ]);
     }
 
+    /**
+     * @param ECardStoreRequest $request
+     * @return Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
+     */
     public function store(ECardStoreRequest $request): Application|Redirector|RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         $user = request()->user();
@@ -88,6 +92,10 @@ class ECardController extends Controller
         return redirect('/e-card/' . $eCardInformation->id);
     }
 
+    /**
+     * @param Request $request
+     * @return Response
+     */
     public function index(Request $request): Response
     {
         $user = $request->user();
@@ -99,6 +107,11 @@ class ECardController extends Controller
             Inertia::render('Dashboard');
     }
 
+    /**
+     * @param ECardUpdateRequest $request
+     * @param ECard $eCard
+     * @return string
+     */
     public function update(ECardUpdateRequest $request, ECard $eCard): string
     {
         $user = $request->user();
@@ -115,5 +128,25 @@ class ECardController extends Controller
         $eCard->save();
 
         return $url;
+    }
+
+    /**
+     * @param ECard $eCard
+     * @return RedirectResponse
+     * @throws AuthorizationException
+     */
+    public function destroy(ECard $eCard): RedirectResponse
+    {
+        $this->authorize('delete', $eCard);
+
+        $eCardInformation = $eCard->eCardInformation;
+
+        Storage::delete($eCardInformation->image_url);
+        Storage::delete($eCard->thumbnail_url);
+
+        $eCardInformation->delete();
+        $eCard->delete();
+
+        return back();
     }
 }
