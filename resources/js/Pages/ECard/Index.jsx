@@ -32,9 +32,11 @@ export default function ShowNewECards({ auth, e_cards }) {
                                             alt={e_card_data[key].attributes.name}/>
                                     </Link>
 
-                                    <div className="flex p-2 justify-center">
-                                        <PrimaryButton>Delete</PrimaryButton>
-                                    </div>
+                                    <Link href={route('e-card.destroy', [e_card_data[key].id])} method="delete">
+                                        <div className="flex p-2 justify-center">
+                                            <PrimaryButton>Delete</PrimaryButton>
+                                        </div>
+                                    </Link>
                                 </div>
                             ))}
                         </div>

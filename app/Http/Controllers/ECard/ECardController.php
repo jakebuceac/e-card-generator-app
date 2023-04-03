@@ -16,6 +16,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -122,6 +123,12 @@ class ECardController extends Controller
 
         $url = (new ConvertBase64ToImageAction())->execute($request->image_base_64, $user, $request->filename);
 
+        $thumbnailPath = '/' . $user->id .  '/e-cards/thumbnails/' . $eCard->name;
+
+        if (Storage::exists($thumbnailPath)) {
+            Storage::delete($thumbnailPath);
+        }
+
         $eCard->name = $request->filename;
         $eCard->size = $request->size;
         $eCard->thumbnail_url = $url;
@@ -131,22 +138,30 @@ class ECardController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param ECard $eCard
      * @return RedirectResponse
      * @throws AuthorizationException
      */
-    public function destroy(ECard $eCard): RedirectResponse
+    public function destroy(Request $request, ECard $eCard): RedirectResponse
     {
         $this->authorize('delete', $eCard);
 
+        $user = $request->user();
+
         $eCardInformation = $eCard->eCardInformation;
 
-        Storage::delete($eCardInformation->image_url);
-        Storage::delete($eCard->thumbnail_url);
+        $thumbnailPath = '/' . $user->id .  '/e-cards/thumbnails/' . $eCard->name;
+        $filePath = '/' . $user->id .  '/e-cards/' . $eCardInformation->name;
+
+        if (Storage::exists($thumbnailPath) && Storage::exists($filePath)) {
+            Storage::delete($thumbnailPath);
+            Storage::delete($filePath);
+        }
 
         $eCardInformation->delete();
         $eCard->delete();
 
-        return back();
+        return Redirect::route('dashboard');
     }
 }
