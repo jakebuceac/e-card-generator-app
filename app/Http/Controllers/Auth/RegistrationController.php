@@ -17,6 +17,8 @@ class RegistrationController extends Controller
 {
     /**
      * Display the registration view.
+     *
+     * @return Response
      */
     public function create(): Response
     {
@@ -26,7 +28,8 @@ class RegistrationController extends Controller
     /**
      * Handle an incoming registration request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @param RegisterRequest $request
+     * @return RedirectResponse
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
