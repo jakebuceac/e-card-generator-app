@@ -1,8 +1,8 @@
 ## About The E-Card Generator App
 
-This project consists of a web application that enables the user to generate personalised cards.
+This project consists of a web application that enables the user to generate personalised cards
 
-The E-Card Generator App uses Laravel to server-side render React views.
+The E-Card Generator App uses Laravel to server-side render React views
 
 ## Requirements
 
@@ -46,7 +46,7 @@ Finally to view the front-end locally you will need to run the following command
 npm run dev
 ```
 
-You should now be able to access your project by visiting [http://localhost](http://localhost).
+You should now be able to access your project by visiting [http://localhost](http://localhost)
 
 For more information on Laravel Sail, please visit the [official documentation](https://laravel.com/docs/8.x/sail)
 
