@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class IndexTest extends TestCase
+class ECardIndexTest extends TestCase
 {
     use RefreshDatabase;
 
