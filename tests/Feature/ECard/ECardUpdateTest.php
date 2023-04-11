@@ -9,7 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class UpdateTest extends TestCase
+class ECardUpdateTest extends TestCase
 {
     public function test_e_card_information_gets_updated(): void
     {

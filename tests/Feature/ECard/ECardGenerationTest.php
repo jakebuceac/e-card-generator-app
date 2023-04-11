@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class GenerationTest extends TestCase
+class ECardGenerationTest extends TestCase
 {
     use RefreshDatabase;
 
