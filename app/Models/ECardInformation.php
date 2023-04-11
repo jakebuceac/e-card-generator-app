@@ -16,6 +16,7 @@ class ECardInformation extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'image_name',
         'image_url',
         'assets',
     ];

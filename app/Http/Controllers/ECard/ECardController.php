@@ -85,6 +85,7 @@ class ECardController extends Controller
 
         $eCardInformation = $eCard->eCardInformation()->save(
             new ECardInformation([
+                'image_name' => basename($imageUrl),
                 'image_url' => $imageUrl,
                 'assets' => $assets,
             ])
@@ -152,7 +153,7 @@ class ECardController extends Controller
         $eCardInformation = $eCard->eCardInformation;
 
         $thumbnailPath = '/' . $user->id .  '/e-cards/thumbnails/' . $eCard->name;
-        $filePath = '/' . $user->id .  '/e-cards/' . $eCardInformation->name;
+        $filePath = '/' . $user->id .  '/e-cards/' . $eCardInformation->image_name;
 
         if (Storage::exists($thumbnailPath) && Storage::exists($filePath)) {
             Storage::delete($thumbnailPath);

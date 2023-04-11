@@ -22,6 +22,7 @@ class ECardInformationFactory extends Factory
     {
         return [
             'e_card_id' => ECard::factory(),
+            'image_name' => fake()->name(),
             'image_url' => fake()->imageUrl(),
             'assets' => $this->assets(),
         ];
