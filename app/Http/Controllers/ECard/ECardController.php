@@ -76,7 +76,7 @@ class ECardController extends Controller
 
         $eCard = $user->eCards()->save(
             new ECard([
-                'name' => $request->name,
+                'name' => basename(Storage::url($thumbnailPath)),
                 'thumbnail_url' => Storage::url($thumbnailPath),
                 'size' => $request->image_size,
                 'occasion' => $request->occasion,
