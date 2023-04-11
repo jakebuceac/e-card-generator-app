@@ -129,7 +129,7 @@ class ECardController extends Controller
             Storage::delete($thumbnailPath);
         }
 
-        $eCard->name = $request->filename;
+        $eCard->name = basename($url);
         $eCard->size = $request->size;
         $eCard->thumbnail_url = $url;
         $eCard->save();
