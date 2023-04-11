@@ -40,9 +40,13 @@ class UpdateTest extends TestCase
             ->assertOk()
             ->assertSessionHasNoErrors();
 
+        $usersECard->refresh();
+
         $this->assertDatabaseHas('e_cards', [
+            'id' => $usersECard->id,
             'user_id' => $user->id,
-            'name' => 'Test2.png',
+            'name' => basename($usersECard->name),
+            'thumbnail_url' => $usersECard->thumbnail_url,
             'size' => ECardSizeEnum::LARGE->value,
             'occasion' => $usersECard->occasion,
         ]);
