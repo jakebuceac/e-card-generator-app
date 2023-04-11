@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
-class StoreTest extends TestCase
+class ECardStoreTest extends TestCase
 {
     use RefreshDatabase;
 
