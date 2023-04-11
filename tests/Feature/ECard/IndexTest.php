@@ -22,4 +22,13 @@ class IndexTest extends TestCase
             ->assertOk()
             ->assertSessionHasNoErrors();
     }
+
+    public function test_users_cannot_see_dashboard_if_unauthenticated(): void
+    {
+        $response = $this
+            ->get('/dashboard');
+
+        $response->assertFound();
+        $response->assertRedirect('/login');
+    }
 }
