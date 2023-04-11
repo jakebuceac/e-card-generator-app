@@ -77,4 +77,13 @@ class ProfileTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
+
+    public function test_profile_page_is_not_displayed_if_user_is_unauthenticated(): void
+    {
+        $response = $this
+            ->get('/profile');
+
+        $response->assertFound();
+        $response->assertRedirect('/login');
+    }
 }

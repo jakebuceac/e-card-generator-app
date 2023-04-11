@@ -14,6 +14,7 @@ return new class extends Migration {
         Schema::create('e_card_information', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(ECard::class);
+            $table->string('image_name');
             $table->string('image_url');
             $table->json('assets')->nullable();
             $table->timestamps();

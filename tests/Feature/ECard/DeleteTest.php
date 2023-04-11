@@ -122,7 +122,7 @@ class DeleteTest extends TestCase
         $this->assertEmpty(Storage::allFiles($filePath));
     }
 
-    public function test_users_see_403_when_trying_to_delete_an_e_card_not_made_by_them()
+    public function test_users_see_403_when_trying_to_delete_an_e_card_not_made_by_them(): void
     {
         $user = User::factory()
             ->has(
@@ -143,6 +143,7 @@ class DeleteTest extends TestCase
         $eCard->name = 'Test_512x512.png';
         $eCard->save();
 
+        $eCardInformation->image_name = basename(Storage::url($filePath));
         $eCardInformation->image_url = Storage::url($filePath);
         $eCardInformation->save();
 

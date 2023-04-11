@@ -25,6 +25,15 @@ class GenerationTest extends TestCase
             ->assertSessionHasNoErrors();
     }
 
+    public function test_generate_form_page_is_not_displayed_if_user_is_unauthenticated(): void
+    {
+        $response = $this
+            ->get('/e-card/generate');
+
+        $response->assertFound();
+        $response->assertRedirect('/login');
+    }
+
     public function test_e_cards_can_be_generated(): void
     {
         Storage::fake('spaces');
@@ -55,7 +64,7 @@ class GenerationTest extends TestCase
         $this->assertTrue(count(Storage::allFiles($thumbnailsTemporaryPath)) === 6);
     }
 
-    public function test_e_card_form_fields_must_be_provided()
+    public function test_e_card_form_fields_must_be_provided(): void
     {
         $user = User::factory()->create();
 
