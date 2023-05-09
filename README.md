@@ -16,6 +16,9 @@ First time:
 ```shell
 copy and paste .env.example and rename it to .env
 ```
+
+Once the ```.env``` file has been created add the OpenAI credentials.
+
 ## Installation
 
 To get started with local development, please follow the steps below:
