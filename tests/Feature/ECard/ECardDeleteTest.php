@@ -124,6 +124,8 @@ class ECardDeleteTest extends TestCase
 
     public function test_users_see_403_when_trying_to_delete_an_e_card_not_made_by_them(): void
     {
+        Storage::fake('spaces');
+        
         $user = User::factory()
             ->has(
                 ECard::factory()
