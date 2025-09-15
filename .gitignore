@@ -17,3 +17,4 @@ yarn-error.log
 /.vscode
 /.php-cs-fixer.cache
 /public/hot
+/composer.lock
